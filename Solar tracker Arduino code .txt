@@ -1,0 +1,63 @@
+
+// Tinkercad Link contact : kumarsaurabh@iitgn.ac.in
+
+#include <LiquidCrystal.h> 
+#include <Servo.h>
+
+void UpDown();
+void LeftRight();
+Servo servo1;
+Servo servo2;
+LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
+void setup() {
+  
+  lcd.begin(16,2); 
+  lcd.print("servo1 "); 
+  lcd.setCursor(0,1);
+  lcd.print("servo2 ");
+  servo1.attach(9);
+  servo2.attach(10); 
+  
+  servo1.write(45); 
+  servo2.write(45); 
+}
+
+void loop(){
+  
+ int Top = analogRead(A0);
+ int Bottom = analogRead(A1);
+ int Left = analogRead(A3);
+ int Right = analogRead(A4);
+
+
+
+ 
+  int pos1= servo1.read();
+  int pos2= servo2.read();
+    if ((-1<pos1 and pos1<182)and (-1<pos2 and pos2<182))
+    { if(Top < Bottom)
+   {
+     pos1 = --pos1; 
+    }
+  	 else
+     {
+      pos1 = ++pos1;
+     }
+  servo1.write(pos1);
+   lcd.setCursor(12,0);
+ lcd.print(pos1);
+ 
+
+  
+  if(Left < Right)
+   { 
+    pos2 = --pos2;
+   }
+  	else
+    {
+     pos2 = pos2 + 1;
+    }
+  servo2.write(pos2);
+  lcd.setCursor(12,1);
+ lcd.print(pos2);
+    }}
